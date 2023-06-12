@@ -4,15 +4,28 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.*;
+
+@Entity(name = "Topico")
+@Table(name = "topicos")
 public class Topico {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String mensaje;
+	@Column(name = "fecha_creacion")
 	private LocalDateTime fechaCreacion = LocalDateTime.now();
+	@Enumerated(EnumType.STRING)
 	private StatusTopico status = StatusTopico.NO_RESPONDIDO;
+	@ManyToOne
+	@JoinColumn(name = "autor_id")
 	private Usuario autor;
+	@ManyToOne
+	@JoinColumn(name = "curso_id")
 	private Curso curso;
+	@OneToMany(mappedBy = "topico", cascade = CascadeType.ALL)
 	private List<Respuesta> respuestas = new ArrayList<>();
 
 	public Topico(String titulo, String mensaje, Curso curso) {

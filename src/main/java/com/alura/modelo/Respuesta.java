@@ -2,12 +2,29 @@ package com.alura.modelo;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity(name = "Respuesta")
+@Table(name = "respuestas")
 public class Respuesta {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String mensaje;
+	
+	@Enumerated(EnumType.STRING)
 	private Topico topico;
 	private LocalDateTime fechaCreacion = LocalDateTime.now();
+	
+	@Embedded
 	private Usuario autor;
 	private Boolean solucion = false;
 

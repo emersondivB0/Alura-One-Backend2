@@ -1,7 +1,13 @@
 package com.alura.modelo;
 
+import jakarta.persistence.*;
+
+@Entity(name = "Curso")
+@Table(name = "cursos")
 public class Curso {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
 	private String categoria;
